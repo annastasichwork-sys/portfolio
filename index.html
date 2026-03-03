@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Портфолио Анастасии Кузнецовой</title>
 
-  <!-- Fonts (минимально похоже на реф: жирный дисплей + аккуратный текст) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -16,8 +15,8 @@
 
   <style>
     :root{
-      --bg: #d9d7cf;          /* теплый серо-бежевый как у рефа */
-      --panel: #e2e0d8;       /* чуть светлее подложки */
+      --bg: #d9d7cf;
+      --panel: #e2e0d8;
       --ink: #1b1b1b;
       --muted: rgba(27,27,27,.62);
       --hair: rgba(27,27,27,.14);
@@ -46,7 +45,6 @@
       margin: 0 auto;
     }
 
-    /* Header */
     header{
       position: sticky;
       top: 0;
@@ -106,7 +104,7 @@
       justify-content:center;
       gap:10px;
       background: var(--btn);
-      color:#fff;
+      color:#fff !important;
       padding: 12px 16px;
       border-radius: 999px;
       text-decoration:none;
@@ -122,7 +120,7 @@
     }
     .btn.secondary{
       background: var(--btn2);
-      color: var(--ink);
+      color: var(--ink) !important;
       box-shadow: none;
       border: 1px solid var(--hair);
       font-weight: 700;
@@ -132,7 +130,17 @@
       background: rgba(0,0,0,.10);
     }
 
-    /* Sections */
+    /* FIX: чтобы текст/иконки в кнопках точно не пропадали */
+    .btn *{
+      color: inherit !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+    }
+    .btn i, .btn svg{
+      fill: currentColor !important;
+      stroke: currentColor !important;
+    }
+
     section{ padding: 72px 0; }
     .divider{
       height: 1px;
@@ -140,7 +148,6 @@
       margin: 56px 0;
     }
 
-    /* HERO (как на рефе: слева текст, центр фото, справа вертикальная статистика) */
     #hero{ padding: 64px 0 56px; }
     .hero-grid{
       display:grid;
@@ -244,7 +251,6 @@
       font-weight: 700;
     }
 
-    /* Заголовки секций */
     h2{
       font-family: "Bebas Neue", Inter, sans-serif;
       font-size: clamp(34px, 4vw, 56px);
@@ -261,7 +267,6 @@
     }
     h4{ margin: 0 0 10px; }
 
-    /* ABOUT (двухколоночная подача как на рефе) */
     .about-grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -275,7 +280,6 @@
       font-size: 15.5px;
     }
 
-    /* Бывшие карточки статистики оставим, но оформим мягко и плоско */
     .stats{
       display:grid;
       grid-template-columns: repeat(4, minmax(160px, 1fr));
@@ -305,7 +309,6 @@
       font-size: 12.5px;
     }
 
-    /* SKILLS */
     .skills-grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -347,7 +350,6 @@
       line-height: 1;
     }
 
-    /* PORTFOLIO */
     #portfolio p{
       color: var(--muted);
       max-width: 90ch;
@@ -410,7 +412,6 @@
     }
     .hidden{ display:none; }
 
-    /* TECH */
     .tech-stack{
       display:flex;
       flex-wrap: wrap;
@@ -430,7 +431,6 @@
     }
     .tech-item i{ color: var(--ink); opacity:.7; }
 
-    /* CONTACT */
     #contact{
       text-align:left;
     }
@@ -448,6 +448,14 @@
     }
     #contact a:hover{ border-bottom-color: rgba(0,0,0,.35); }
 
+    /* Контактные кнопки */
+    .contact-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
     footer{
       border-top: 1px solid var(--hair);
       padding: 24px 0;
@@ -456,7 +464,6 @@
     }
     footer a{ color: var(--ink); }
 
-    /* Responsive */
     @media (max-width: 980px){
       .hero-grid{
         grid-template-columns: 1fr;
@@ -481,6 +488,16 @@
       .skills-grid,
       .cases-grid{
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px){
+      .contact-actions{
+        flex-direction: column;
+      }
+      .contact-actions .btn{
+        width: 100%;
+        text-align: center;
       }
     }
 
@@ -519,7 +536,6 @@
 <section id="hero">
   <div class="container">
     <div class="hero-grid">
-      <!-- LEFT -->
       <div>
         <div class="kicker"><span class="kicker-line"></span> ПОРТФОЛИО</div>
         <h1>Анастасия Кузнецова</h1>
@@ -529,19 +545,20 @@
         </p>
         <div class="buttons">
           <a href="#portfolio" class="btn"><i class="fa-regular fa-folder-open"></i> Смотреть кейсы</a>
-          <a href="#" class="btn secondary"><i class="fa-regular fa-file-lines"></i> Скачать резюме (PDF)</a>
+
+          <!-- FIX: рабочая ссылка на pdf в той же папке -->
+          <a href="Кузнецова%20А%20_%20резюме.pdf" class="btn secondary" download>
+            <i class="fa-regular fa-file-lines"></i> Скачать резюме (PDF)
+          </a>
         </div>
       </div>
 
-      <!-- CENTER PHOTO -->
       <div class="hero-photo">
         <div class="photo-ring" aria-label="Портрет">
-          <!-- Положи файл photo.jpg рядом с этим HTML -->
           <img src="a157a084-a28b-4319-920b-d6cd00bd53d9.jpg" alt="Анастасия Кузнецова">
         </div>
       </div>
 
-      <!-- RIGHT STATS (контент тот же, просто перенесён в hero как в рефе) -->
       <aside class="hero-stats" aria-label="Ключевые показатели">
         <div class="stat">
           <div class="num">2,5+</div>
@@ -581,7 +598,6 @@
       </div>
     </div>
 
-    <!-- Оставил блок как был в твоем коде, просто визуально сделал спокойнее -->
     <div class="stats">
       <div class="stat-card">
         <h3>2,5+</h3>
@@ -798,6 +814,7 @@
     <p>Все проекты реализованы в 2023–2026 годах в B2B-сегменте (промышленное оборудование, производство, дистрибуция). Названия компаний обобщены, результаты представлены в относительных величинах.</p>
 
     <div class="cases-grid">
+      <!-- кейсы без изменений -->
       <!-- 1 -->
       <div class="case-card">
         <h3>1. Интерактивная модель аналитики на основе матрицы Гаусса</h3>
@@ -899,13 +916,13 @@
       <!-- 8 -->
       <div class="case-card">
         <h3>8. Анонимный канал обратной связи с сотрудниками</h3>
-        <p class="case-tags">#коммуникации #HR #Telegram</p>
+        <p class="case-tags">#коммуникации #HR</p>
         <p class="case-preview">В компании отсутствовал открытый диалог между линейным персоналом и руководством.</p>
         <button class="case-toggle">Подробнее</button>
         <div class="case-details hidden">
           <p><strong>Контекст:</strong> В компании отсутствовал открытый диалог между линейным персоналом и руководством, что снижало вовлечённость и порождало слухи.</p>
           <p><strong>Задача:</strong> Создать безопасное пространство для сбора обратной связи.</p>
-          <p><strong>Мои действия:</strong> Разработала анонимный чат-бот (на базе Telegram), куда сотрудники могли отправлять вопросы, жалобы и предложения. Регулярно агрегировала данные и передавала руководству в обобщённом виде.</p>
+          <p><strong>Мои действия:</strong> Разработала анонимный чат (HTML), куда сотрудники могли отправлять вопросы, жалобы и предложения. Регулярно агрегировала данные и передавала руководству в обобщённом виде.</p>
           <p><strong>Результат:</strong> Улучшение внутреннего климата подтверждено анонимными опросами: удовлетворённость выросла на 25%. Руководство стало оперативно реагировать на проблемы.</p>
         </div>
       </div>
@@ -1020,15 +1037,16 @@
       <div class="tech-item"><i class="fas fa-analytics"></i> Google Analytics</div>
       <div class="tech-item"><i class="fas fa-analytics"></i> Yandex.Metrica</div>
       <div class="tech-item"><i class="fab fa-trello"></i> Tilda</div>
+      <div class="tech-item"><i class="fab fa-paint"></i> Презентации</div>
       <div class="tech-item"><i class="fab fa-telegram"></i> Telegram API</div>
-      <div class="tech-item"><i class="fas fa-robot"></i> Python (скрипты)</div>
-      <div class="tech-item"><i class="fab fa-html5"></i> HTML/CSS/JS</div>
+      <div class="tech-item"><i class="fab fa-html5"></i> HTML</div>
       <div class="tech-item"><i class="fas fa-robot"></i> Боты</div>
-      <div class="tech-item"><i class="fas fa-database"></i> 1С (интеграции)</div>
       <div class="tech-item"><i class="fas fa-brain"></i> ChatGPT</div>
       <div class="tech-item"><i class="fas fa-brain"></i> Claude</div>
       <div class="tech-item"><i class="fas fa-brain"></i> DeepSeek</div>
-      <div class="tech-item"><i class="fas fa-image"></i> Midjourney</div>
+      <div class="tech-item"><i class="fas fa-brain"></i> Midjourney</div>
+      <div class="tech-item"><i class="fas fa-brain"></i> GROK</div>
+      <div class="tech-item"><i class="fas fa-brain"></i> Яндекс AI</div>
     </div>
   </div>
 </section>
@@ -1038,11 +1056,12 @@
     <h2>Свяжитесь со мной</h2>
     <ul>
       <li>Email: <a href="mailto:nastya.chechina@yandex.ru">nastya.chechina@yandex.ru</a></li>
-      <li>Telegram: <a href="https://t.me/annastasi_ch">@annastasi_ch</a></li>
+      <li>Telegram: <a href="https://t.me/annastasi_ch" target="_blank" rel="noopener noreferrer">@annastasi_ch</a></li>
       <li>Телефон: <a href="tel:+79017946468">+7 (901) 794-64-68</a></li>
     </ul>
 
-    <div class="contact-actions" style="display:flex; gap:12px; flex-wrap:wrap; margin-top:14px;">
+    <!-- FIX: нормальная верстка кнопок без вложенных дивов -->
+    <div class="contact-actions">
       <a
         href="https://hh.ru/resume/ca083b49ff1017b8800039ed1f71596a777377?from=share_ios"
         class="btn"
@@ -1057,23 +1076,14 @@
         class="btn"
         target="_blank"
         rel="noopener noreferrer"
-      ><div class="contact-actions">
-  <a 
-    href="https://hh.ru/resume/ca083b49ff1017b8800039ed1f71596a777377?from=share_ios"
-    class="btn"
-    target="_blank"
-  >
-    Открыть HH
-  </a>
+      >
+        <i class="fab fa-telegram"></i> Написать в Telegram
+      </a>
 
-  <a 
-    href="https://t.me/annastasi_ch"
-    class="btn"
-    target="_blank"
-  >
-    Написать в Telegram
-  </a>
-</div>
+      <!-- FIX: еще одна рабочая ссылка на резюме здесь тоже -->
+      <a href="Кузнецова%20А%20_%20резюме.pdf" class="btn secondary" download>
+        <i class="fa-regular fa-file-lines"></i> Скачать резюме (PDF)
+      </a>
     </div>
 
     <p style="color: var(--muted); margin-top: 14px;">Готова к обсуждению проектов, отвечу в течение дня</p>
@@ -1082,7 +1092,10 @@
 
 <footer>
   <div class="container">
-    <p>&copy; 2026, Анастасия Кузнецова. <a href="#">Скачать резюме (PDF)</a></p>
+    <p>&copy; 2026, Анастасия Кузнецова.
+      <!-- FIX: рабочая ссылка в футере -->
+      <a href="Кузнецова%20А%20_%20резюме.pdf" download>Скачать резюме (PDF)</a>
+    </p>
   </div>
 </footer>
 
