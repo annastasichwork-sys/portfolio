@@ -2,146 +2,225 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Skills Block</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Портфолио Анастасии Кузнецовой</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
 <style>
-body {
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+:root{
+  --bg: #d9d7cf;
+  --panel: #e2e0d8;
+  --ink: #1b1b1b;
+  --muted: rgba(27,27,27,.65);
+  --hair: rgba(27,27,27,.14);
+  --btn: #1b1b1b;
 }
 
-/* Кнопка */
-.more-wrapper {
-  margin-top: 32px;
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+}
+.container{
+  width:min(1100px, 92%);
+  margin:0 auto;
+  padding:60px 0;
+}
+h2{
+  font-family:"Bebas Neue", sans-serif;
+  font-size:48px;
+  margin-bottom:30px;
+}
+h3{
+  margin-top:40px;
+}
+.skills-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.skill-group{
+  background:var(--panel);
+  padding:20px;
+  border-radius:18px;
+}
+.skill-group ul{
+  margin:0;
+  padding-left:18px;
+  color:var(--muted);
 }
 
-.more-btn {
-  background: #111;
-  color: #fff;
-  border: none;
-  padding: 8px 18px;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+/* КЛЮЧЕВЫЕ */
+.key-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:15px;
+  margin-bottom:25px;
+}
+.key-card{
+  background:var(--panel);
+  padding:18px;
+  border-radius:18px;
+  font-size:14px;
+}
+.key-title{
+  font-weight:700;
+  margin-bottom:6px;
 }
 
-.more-btn:hover {
-  background: #000;
-  transform: translateY(-1px);
+/* КНОПКА */
+.more-skills summary{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 16px;
+  background:var(--btn);
+  color:#fff;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  border:none;
+  list-style:none;
+}
+.more-skills summary::-webkit-details-marker{display:none}
+.more-skills summary::after{
+  content:"▾";
+  font-size:12px;
+}
+.more-skills[open] summary::after{
+  content:"▴";
 }
 
-/* Скрытый блок */
-.more-content {
-  display: none;
-  margin-top: 24px;
+/* ФИЛЬТРЫ */
+.controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  margin:25px 0 10px;
 }
-
-/* Фильтры */
-.filters {
-  margin-bottom: 16px;
+.chips{
+  display:flex;
+  gap:10px;
 }
-
-.filter-btn {
-  background: transparent;
-  border: 1px solid #111;
-  color: #111;
-  padding: 6px 14px;
-  font-size: 13px;
-  border-radius: 16px;
-  cursor: pointer;
-  margin-right: 8px;
-  transition: 0.2s;
+.chip{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--hair);
+  background:#eee;
+  cursor:pointer;
+  font-weight:600;
 }
-
-.filter-btn.active,
-.filter-btn:hover {
-  background: #111;
-  color: #fff;
+.chip.active{
+  background:var(--btn);
+  color:#fff;
 }
-
-/* Поиск */
-.search-input {
-  display: block;
-  margin-bottom: 16px;
-  padding: 8px 12px;
-  width: 100%;
-  max-width: 320px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+.search{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--hair);
+  width:300px;
 }
+.hidden{display:none}
 
-/* Список */
-.skill-list {
-  list-style: none;
-  padding: 0;
-}
-
-.skill-item {
-  margin-bottom: 10px;
+@media(max-width:1000px){
+  .skills-grid{grid-template-columns:1fr}
+  .key-grid{grid-template-columns:1fr}
+  .search{width:100%;margin-top:10px}
 }
 </style>
 </head>
-
 <body>
 
-<div class="more-wrapper">
-  <button class="more-btn" onclick="toggleMore()">Узнать больше</button>
+<section id="skills">
+<div class="container">
+<h2>Навыки</h2>
+
+<div class="key-grid">
+<div class="key-card"><div class="key-title">Customer + Market Insight</div>Анализ ЦА, интервью, CJM, конкурентная разведка</div>
+<div class="key-card"><div class="key-title">Growth и аналитика</div>ROMI, CAC, воронки, гипотезы и тесты</div>
+<div class="key-card"><div class="key-title">Бренд и продукт</div>Позиционирование, портфель, стратегия</div>
+<div class="key-card"><div class="key-title">Автоматизация</div>Excel, боты, скрипты, дашборды</div>
+<div class="key-card"><div class="key-title">B2B-коммуникация</div>Контент, презентации, SMM</div>
 </div>
 
-<div id="moreContent" class="more-content">
+<details class="more-skills">
+<summary>Узнать больше</summary>
 
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterSkills('all', this)">Все</button>
-    <button class="filter-btn" onclick="filterSkills('hard', this)">Hard skills</button>
-    <button class="filter-btn" onclick="filterSkills('soft', this)">Soft skills</button>
-  </div>
+<div class="controls">
+<div class="chips">
+<button class="chip active" data-filter="all">Все</button>
+<button class="chip" data-filter="hard">Hard skills</button>
+<button class="chip" data-filter="soft">Soft skills</button>
+</div>
+<input class="search" type="text" placeholder="Поиск по навыкам..." id="searchInput">
+</div>
 
-  <input type="text" class="search-input" placeholder="Поиск по навыкам..." onkeyup="searchSkills(this.value)">
+<h3>Hard skills</h3>
+<div class="skills-grid">
+<div class="skill-group" data-type="hard">
+<ul>
+<li>PESTEL, SWOT, 5 сил Портера</li>
+<li>CJM, глубинные интервью</li>
+<li>ROMI, CAC, прогнозирование</li>
+<li>Excel, VBA, дашборды</li>
+<li>Telegram-боты</li>
+<li>SEO, Tilda</li>
+</ul>
+</div>
+</div>
 
-  <ul class="skill-list" id="skillsList">
-    <li class="skill-item" data-type="hard">Growth-эксперименты и аналитика</li>
-    <li class="skill-item" data-type="hard">ROMI, CAC, воронка продаж</li>
-    <li class="skill-item" data-type="hard">SEO и performance-оптимизация</li>
-    <li class="skill-item" data-type="hard">Автоматизация и дашборды</li>
-    <li class="skill-item" data-type="soft">Стратегическое мышление</li>
-    <li class="skill-item" data-type="soft">Креатив и сторителлинг</li>
-    <li class="skill-item" data-type="soft">Лидерство и управление командой</li>
-    <li class="skill-item" data-type="soft">Коммуникация и переговоры</li>
-  </ul>
+<h3>Soft skills</h3>
+<div class="skills-grid">
+<div class="skill-group" data-type="soft">
+<ul>
+<li>Стратегическое мышление</li>
+<li>Системность</li>
+<li>Лидерство</li>
+<li>Коммуникация</li>
+<li>Креативность</li>
+<li>Управление проектами</li>
+</ul>
+</div>
+</div>
+
+</details>
 
 </div>
+</section>
 
 <script>
-function toggleMore() {
-  const block = document.getElementById("moreContent");
-  block.style.display = block.style.display === "block" ? "none" : "block";
-}
+const chips=document.querySelectorAll(".chip");
+const groups=document.querySelectorAll(".skill-group");
+const searchInput=document.getElementById("searchInput");
 
-function filterSkills(type, button) {
-  const items = document.querySelectorAll(".skill-item");
-  const buttons = document.querySelectorAll(".filter-btn");
+chips.forEach(chip=>{
+chip.addEventListener("click",()=>{
+chips.forEach(c=>c.classList.remove("active"));
+chip.classList.add("active");
+filterSkills();
+});
+});
 
-  buttons.forEach(btn => btn.classList.remove("active"));
-  button.classList.add("active");
+searchInput.addEventListener("input",filterSkills);
 
-  items.forEach(item => {
-    if (type === "all" || item.dataset.type === type) {
-      item.style.display = "list-item";
-    } else {
-      item.style.display = "none";
-    }
-  });
-}
+function filterSkills(){
+const filter=document.querySelector(".chip.active").dataset.filter;
+const query=searchInput.value.toLowerCase();
 
-function searchSkills(query) {
-  const items = document.querySelectorAll(".skill-item");
-  query = query.toLowerCase();
-
-  items.forEach(item => {
-    const text = item.textContent.toLowerCase();
-    item.style.display = text.includes(query) ? "list-item" : "none";
-  });
+groups.forEach(group=>{
+const type=group.dataset.type;
+const text=group.innerText.toLowerCase();
+const matchType=filter==="all"||filter===type;
+const matchSearch=text.includes(query);
+group.style.display=(matchType&&matchSearch)?"block":"none";
+});
 }
 </script>
 
