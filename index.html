@@ -1,1276 +1,149 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Портфолио Анастасии Кузнецовой</title>
+<meta charset="UTF-8">
+<title>Skills Block</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+/* Кнопка */
+.more-wrapper {
+  margin-top: 32px;
+}
 
-  <style>
-    :root{
-      --bg: #d9d7cf;
-      --panel: #e2e0d8;
-      --ink: #1b1b1b;
-      --muted: rgba(27,27,27,.62);
-      --hair: rgba(27,27,27,.14);
-      --btn: #1b1b1b;
-      --btn2: rgba(27,27,27,.08);
+.more-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
 
-      --radius: 18px;
-      --radius-lg: 28px;
+.more-btn:hover {
+  background: #000;
+  transform: translateY(-1px);
+}
 
-      --shadow-soft: 0 18px 55px rgba(0,0,0,.08);
-      --shadow-card: 0 10px 30px rgba(0,0,0,.07);
-    }
+/* Скрытый блок */
+.more-content {
+  display: none;
+  margin-top: 24px;
+}
 
-    *{ box-sizing: border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.65;
-    }
+/* Фильтры */
+.filters {
+  margin-bottom: 16px;
+}
 
-    .container{
-      width: min(1180px, calc(100% - 40px));
-      margin: 0 auto;
-    }
+.filter-btn {
+  background: transparent;
+  border: 1px solid #111;
+  color: #111;
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 16px;
+  cursor: pointer;
+  margin-right: 8px;
+  transition: 0.2s;
+}
 
-    header{
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      background: color-mix(in oklab, var(--bg) 70%, white 30%);
-      border-bottom: 1px solid var(--hair);
-      backdrop-filter: blur(8px);
-    }
-    .header-content{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 18px 0;
-      gap: 18px;
-    }
-    .logo{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-weight: 700;
-      letter-spacing: .2px;
-      white-space: nowrap;
-    }
-    .logo-dot{
-      width: 10px; height: 10px;
-      background: var(--ink);
-      border-radius: 999px;
-      display:inline-block;
-    }
+.filter-btn.active,
+.filter-btn:hover {
+  background: #111;
+  color: #fff;
+}
 
-    nav ul{
-      list-style:none;
-      display:flex;
-      margin:0;
-      padding:0;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content:center;
-    }
-    nav a{
-      text-decoration:none;
-      color: var(--ink);
-      font-weight: 600;
-      opacity: .9;
-      padding: 8px 10px;
-      border-radius: 999px;
-      transition: background .2s, opacity .2s;
-    }
-    nav a:hover{
-      background: rgba(0,0,0,.06);
-      opacity: 1;
-    }
+/* Поиск */
+.search-input {
+  display: block;
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  width: 100%;
+  max-width: 320px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      background: var(--btn);
-      color:#fff !important;
-      padding: 12px 16px;
-      border-radius: 999px;
-      text-decoration:none;
-      font-weight: 700;
-      letter-spacing: .2px;
-      box-shadow: 0 10px 25px rgba(0,0,0,.14);
-      transition: transform .15s ease, box-shadow .15s ease;
-      white-space: nowrap;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      box-shadow: 0 14px 30px rgba(0,0,0,.16);
-    }
-    .btn.secondary{
-      background: var(--btn2);
-      color: var(--ink) !important;
-      box-shadow: none;
-      border: 1px solid var(--hair);
-      font-weight: 700;
-    }
-    .btn.secondary:hover{
-      transform: translateY(-1px);
-      background: rgba(0,0,0,.10);
-    }
+/* Список */
+.skill-list {
+  list-style: none;
+  padding: 0;
+}
 
-    /* FIX: чтобы текст/иконки в кнопках точно не пропадали */
-    .btn *{
-      color: inherit !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-    }
-    .btn i, .btn svg{
-      fill: currentColor !important;
-      stroke: currentColor !important;
-    }
-
-    section{ padding: 72px 0; }
-    .divider{
-      height: 1px;
-      background: var(--hair);
-      margin: 56px 0;
-    }
-
-    #hero{ padding: 64px 0 56px; }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.15fr .95fr .7fr;
-      gap: 36px;
-      align-items: center;
-    }
-
-    .kicker{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color: var(--muted);
-      font-weight: 700;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      font-size: 12px;
-      margin-bottom: 18px;
-    }
-    .kicker-line{
-      width: 34px;
-      height: 1px;
-      background: var(--hair);
-      display:inline-block;
-    }
-
-    #hero h1{
-      margin: 0 0 12px;
-      font-family: "Bebas Neue", Inter, sans-serif;
-      font-size: clamp(44px, 5.4vw, 86px);
-      line-height: .92;
-      letter-spacing: .02em;
-    }
-    #hero .subtitle{
-      margin: 0 0 14px;
-      font-size: 18px;
-      font-weight: 700;
-      color: color-mix(in oklab, var(--ink) 80%, white 20%);
-      max-width: 48ch;
-    }
-    #hero .description{
-      margin: 0 0 22px;
-      max-width: 62ch;
-      color: var(--muted);
-      font-size: 15.5px;
-    }
-    #hero .buttons{
-      display:flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-
-    .hero-photo{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
-    .photo-ring{
-      width: min(360px, 70vw);
-      aspect-ratio: 1/1;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), rgba(255,255,255,0) 55%),
-                  linear-gradient(180deg, rgba(255,255,255,.25), rgba(0,0,0,.04));
-      padding: 14px;
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(255,255,255,.35);
-    }
-    .photo-ring img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 999px;
-      display:block;
-      filter: grayscale(100%) contrast(1.05);
-    }
-
-    .hero-stats{
-      display:flex;
-      flex-direction: column;
-      gap: 14px;
-      align-items: stretch;
-      justify-content:center;
-    }
-    .stat{
-      padding: 16px 18px;
-      border-radius: 16px;
-      background: color-mix(in oklab, var(--panel) 70%, white 30%);
-      border: 1px solid rgba(255,255,255,.35);
-      box-shadow: 0 10px 26px rgba(0,0,0,.06);
-    }
-    .stat .num{
-      font-weight: 800;
-      font-size: 22px;
-      line-height: 1.05;
-      margin-bottom: 4px;
-    }
-    .stat .label{
-      font-size: 12.5px;
-      color: var(--muted);
-      font-weight: 700;
-    }
-
-    h2{
-      font-family: "Bebas Neue", Inter, sans-serif;
-      font-size: clamp(34px, 4vw, 56px);
-      letter-spacing: .02em;
-      line-height: .95;
-      margin: 0 0 26px;
-      text-align:left;
-    }
-    h3{
-      margin: 32px 0 18px;
-      font-size: 18px;
-      letter-spacing: .02em;
-      text-transform: none;
-    }
-    h4{ margin: 0 0 10px; }
-
-    .about-grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 32px;
-      align-items: start;
-    }
-    .about-left p,
-    .about-right p{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 15.5px;
-    }
-
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(4, minmax(160px, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-    .stat-card{
-      background: color-mix(in oklab, var(--panel) 72%, white 28%);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 16px;
-      padding: 18px;
-      box-shadow: 0 10px 26px rgba(0,0,0,.06);
-      text-align:left;
-      min-width: 0;
-    }
-    .stat-card h3{
-      margin:0 0 6px;
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: .01em;
-      text-align:left;
-    }
-    .stat-card p{
-      margin:0;
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 12.5px;
-    }
-
-    .skills-grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 18px;
-    }
-    .skill-group{
-      background: color-mix(in oklab, var(--panel) 72%, white 28%);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      box-shadow: var(--shadow-card);
-    }
-    .skill-group h4{
-      font-size: 16px;
-      margin: 0 0 14px;
-      letter-spacing: .01em;
-    }
-    .skill-group ul{
-      list-style:none;
-      padding:0;
-      margin:0;
-      display:grid;
-      gap: 8px;
-    }
-    .skill-group li{
-      position:relative;
-      padding-left: 24px;
-      color: var(--muted);
-      font-size: 14.6px;
-    }
-    .skill-group li:before{
-      content: "•";
-      position:absolute;
-      left: 6px;
-      top: -1px;
-      color: var(--ink);
-      opacity: .65;
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    #portfolio p{
-      color: var(--muted);
-      max-width: 90ch;
-      margin: 0 0 18px;
-    }
-    .cases-grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 18px;
-      margin-top: 18px;
-    }
-    .case-card{
-      background: color-mix(in oklab, var(--panel) 72%, white 28%);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: var(--radius-lg);
-      padding: 22px;
-      box-shadow: var(--shadow-card);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-    .case-card:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 16px 40px rgba(0,0,0,.10);
-    }
-    .case-card h3{
-      margin:0 0 10px;
-      font-size: 18px;
-      line-height: 1.3;
-    }
-    .case-tags{
-      font-size: 12.5px;
-      color: var(--muted);
-      font-weight: 700;
-      margin-bottom: 10px;
-    }
-    .case-preview{
-      margin: 0 0 14px;
-      color: var(--muted);
-      font-size: 14.6px;
-    }
-    .case-toggle{
-      appearance:none;
-      border:none;
-      cursor:pointer;
-      background: rgba(0,0,0,.08);
-      border: 1px solid var(--hair);
-      color: var(--ink);
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-weight: 800;
-      transition: background .2s ease, transform .15s ease;
-    }
-    .case-toggle:hover{
-      background: rgba(0,0,0,.12);
-      transform: translateY(-1px);
-    }
-    .case-details{
-      margin-top: 14px;
-      color: var(--muted);
-      font-size: 14.6px;
-    }
-    .hidden{ display:none; }
-
-    .tech-stack{
-      display:flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .tech-item{
-      background: color-mix(in oklab, var(--panel) 72%, white 28%);
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 999px;
-      padding: 10px 14px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      box-shadow: 0 10px 22px rgba(0,0,0,.06);
-      color: var(--muted);
-      font-weight: 700;
-    }
-    .tech-item i{ color: var(--ink); opacity:.7; }
-
-    #contact{
-      text-align:left;
-    }
-    #contact ul{
-      list-style:none;
-      padding:0;
-      margin: 0 0 18px;
-      display:grid;
-      gap: 10px;
-    }
-    #contact a{
-      color: var(--ink);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(0,0,0,.18);
-    }
-    #contact a:hover{ border-bottom-color: rgba(0,0,0,.35); }
-
-    .contact-actions{
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 14px;
-    }
-
-    footer{
-      border-top: 1px solid var(--hair);
-      padding: 24px 0;
-      color: var(--muted);
-      background: color-mix(in oklab, var(--bg) 70%, white 30%);
-    }
-    footer a{ color: var(--ink); }
-
-    /* ======= MOBILE MENU (только телефон) ======= */
-    .menu-fab,
-    .mobile-menu{
-      display:none;
-    }
-
-    .menu-fab{
-      appearance:none;
-      border:none;
-      cursor:pointer;
-      padding:0;
-      background:transparent;
-    }
-
-    @media (max-width: 980px){
-      .hero-grid{
-        grid-template-columns: 1fr;
-        gap: 24px;
-        text-align:left;
-      }
-      .hero-photo{ order: 2; }
-      .hero-stats{
-        order: 3;
-        flex-direction: row;
-        flex-wrap: wrap;
-      }
-      .stat{
-        flex: 1 1 160px;
-      }
-      .about-grid{
-        grid-template-columns: 1fr;
-      }
-      .stats{
-        grid-template-columns: repeat(2, minmax(0,1fr));
-      }
-      .skills-grid,
-      .cases-grid{
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 600px){
-      .contact-actions{
-        flex-direction: column;
-      }
-      .contact-actions .btn{
-        width: 100%;
-        text-align: center;
-      }
-    }
-
-    @media (max-width: 560px){
-      /* на телефоне шапка НЕ закреплена */
-      header{
-        position: static;
-        backdrop-filter: none;
-      }
-
-      /* скрываем десктоп-навигацию и кнопку "Связаться" (на мобилке будет меню) */
-      nav,
-      .header-content > a.btn{
-        display:none !important;
-      }
-
-      .header-content{
-        flex-wrap: nowrap;
-      }
-
-      /* круглая ч/б кнопка меню в стиле остальных кнопок */
-      .menu-fab{
-        display:inline-flex;
-        align-items:center;
-        justify-content:center;
-        width:44px;
-        height:44px;
-        border-radius:999px;
-        background: var(--btn);
-        color:#fff;
-        box-shadow: 0 10px 25px rgba(0,0,0,.14);
-        transition: transform .15s ease, box-shadow .15s ease;
-      }
-      .menu-fab:hover{
-        transform: translateY(-1px);
-        box-shadow: 0 14px 30px rgba(0,0,0,.16);
-      }
-      .menu-fab i{
-        color:#fff !important;
-        font-size: 16px;
-      }
-
-      /* выпадающее меню */
-      .mobile-menu{
-        display:block;
-        width: min(520px, calc(100% - 40px));
-        margin: 10px auto 0;
-        background: color-mix(in oklab, var(--panel) 70%, white 30%);
-        border: 1px solid rgba(255,255,255,.35);
-        border-radius: 18px;
-        box-shadow: 0 12px 28px rgba(0,0,0,.08);
-        overflow:hidden;
-
-        max-height: 0;
-        opacity: 0;
-        transform: translateY(-6px);
-        transition: max-height .32s ease, opacity .22s ease, transform .22s ease;
-        pointer-events: none;
-      }
-      .mobile-menu.open{
-        max-height: 420px;
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: auto;
-      }
-
-      .mobile-menu-header{
-        display:flex;
-        align-items:center;
-        justify-content:space-between;
-        padding: 12px 16px;
-        border-bottom: 1px solid var(--hair);
-      }
-      .mobile-menu-title{
-        font-weight: 800;
-        letter-spacing: .2px;
-      }
-      .mobile-menu-close{
-        width: 38px;
-        height: 38px;
-        border-radius: 999px;
-        border: 1px solid var(--hair);
-        background: rgba(0,0,0,.06);
-        cursor:pointer;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-      }
-      .mobile-menu-close i{
-        color: var(--ink);
-        opacity: .85;
-      }
-
-      .mobile-menu a{
-        display:block;
-        padding: 12px 16px;
-        text-decoration:none;
-        color: var(--ink);
-        font-weight: 700;
-        border-bottom: 1px solid rgba(0,0,0,.06);
-      }
-      .mobile-menu a:last-child{
-        border-bottom:none;
-      }
-      .mobile-menu a:hover{
-        background: rgba(0,0,0,.06);
-      }
-
-      #hero{ padding: 44px 0 40px; }
-      .photo-ring{ padding: 10px; }
-      .stats{ grid-template-columns: 1fr; }
-    }
-  </style>
+.skill-item {
+  margin-bottom: 10px;
+}
+</style>
 </head>
 
 <body>
-<header>
-  <div class="container header-content">
-    <div class="logo"><span class="logo-dot"></span> Anastasia Kuznetsova</div>
 
-    <nav aria-label="Навигация">
-      <ul>
-        <li><a href="#about">Обо мне</a></li>
-        <li><a href="#portfolio">Кейсы</a></li>
-        <li><a href="#skills">Навыки</a></li>
-        <li><a href="#contact">Контакты</a></li>
-      </ul>
-    </nav>
+<div class="more-wrapper">
+  <button class="more-btn" onclick="toggleMore()">Узнать больше</button>
+</div>
 
-    <a href="#contact" class="btn"><i class="fa-regular fa-paper-plane"></i> Связаться</a>
+<div id="moreContent" class="more-content">
 
-    <!-- Кнопка меню (видна только на телефоне) -->
-    <button class="menu-fab" id="menuBtn" aria-label="Открыть меню" aria-expanded="false">
-      <i class="fa-solid fa-bars"></i>
-    </button>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterSkills('all', this)">Все</button>
+    <button class="filter-btn" onclick="filterSkills('hard', this)">Hard skills</button>
+    <button class="filter-btn" onclick="filterSkills('soft', this)">Soft skills</button>
   </div>
 
-  <!-- Выпадающее мобильное меню (только телефон) -->
-  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-    <div class="mobile-menu-header">
-      <div class="mobile-menu-title">Меню</div>
-      <button class="mobile-menu-close" id="closeMenu" aria-label="Закрыть меню">
-        <i class="fa-solid fa-chevron-up"></i>
-      </button>
-    </div>
-    <a href="#about" class="m-link">Обо мне</a>
-    <a href="#portfolio" class="m-link">Кейсы</a>
-    <a href="#skills" class="m-link">Навыки</a>
-    <a href="#contact" class="m-link">Контакты</a>
-  </div>
-</header>
+  <input type="text" class="search-input" placeholder="Поиск по навыкам..." onkeyup="searchSkills(this.value)">
 
-<section id="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="kicker"><span class="kicker-line"></span> ПОРТФОЛИО</div>
-        <h1>Анастасия Кузнецова</h1>
-        <p class="subtitle">Маркетолог | Аналитик | Специалист по автоматизации B2B</p>
-        <p class="description">
-          Помогаю производственным и технологическим компаниям находить точки роста через данные, системный подход и внедрение цифровых инструментов. Опыт в промышленном маркетинге — 2,5+ года.
-        </p>
-        <div class="buttons">
-          <a href="#portfolio" class="btn"><i class="fa-regular fa-folder-open"></i> Смотреть кейсы</a>
+  <ul class="skill-list" id="skillsList">
+    <li class="skill-item" data-type="hard">Growth-эксперименты и аналитика</li>
+    <li class="skill-item" data-type="hard">ROMI, CAC, воронка продаж</li>
+    <li class="skill-item" data-type="hard">SEO и performance-оптимизация</li>
+    <li class="skill-item" data-type="hard">Автоматизация и дашборды</li>
+    <li class="skill-item" data-type="soft">Стратегическое мышление</li>
+    <li class="skill-item" data-type="soft">Креатив и сторителлинг</li>
+    <li class="skill-item" data-type="soft">Лидерство и управление командой</li>
+    <li class="skill-item" data-type="soft">Коммуникация и переговоры</li>
+  </ul>
 
-          <a href="Кузнецова%20А%20_%20резюме.pdf" class="btn secondary" download>
-            <i class="fa-regular fa-file-lines"></i> Скачать резюме (PDF)
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-photo">
-        <div class="photo-ring" aria-label="Портрет">
-          <img src="a157a084-a28b-4319-920b-d6cd00bd53d9.jpg" alt="Анастасия Кузнецова">
-        </div>
-      </div>
-
-      <aside class="hero-stats" aria-label="Ключевые показатели">
-        <div class="stat">
-          <div class="num">2,5+</div>
-          <div class="label">года опыта</div>
-        </div>
-        <div class="stat">
-          <div class="num">10+</div>
-          <div class="label">проектов</div>
-        </div>
-        <div class="stat">
-          <div class="num">7/10</div>
-          <div class="label">точность прогнозов</div>
-        </div>
-        <div class="stat">
-          <div class="num">3</div>
-          <div class="label">компании</div>
-        </div>
-      </aside>
-    </div>
-  </div>
-</section>
-
-<div class="container"><div class="divider"></div></div>
-
-<section id="about">
-  <div class="container">
-    <h2>Обо мне</h2>
-
-    <div class="about-grid">
-      <div class="about-left">
-        <p>Маркетолог с опытом работы в производственном и промышленном B2B-сегменте. Специализируюсь на маркетинговой диагностике, анализе целевых аудиторий и поиске точек роста на основе данных. Фокусируюсь на системной настройке маркетинга, выявлении драйверов спроса и формировании решений, которые помогают бизнесу принимать обоснованные управленческие решения и усиливать рыночные позиции.</p>
-      </div>
-
-      <div class="about-right">
-        <p>Выпускница Президентской Академии (маркетинг и менеджмент). Имею практический опыт работы в крупных B2B-компаниях, включая ЭДВАНТА, LEVIN и «Русский Проект», где участвовала в развитии маркетинговых и коммуникационных направлений, работала с цифровыми каналами, аналитикой и маркетинговыми проектами.</p>
-        <p>В работе активно использую ИИ-инструменты для ускорения аналитики и автоматизации рутины.</p>
-      </div>
-    </div>
-
-    <div class="stats">
-      <div class="stat-card">
-        <h3>2,5+</h3>
-        <p>года опыта</p>
-      </div>
-      <div class="stat-card">
-        <h3>10+</h3>
-        <p>проектов</p>
-      </div>
-      <div class="stat-card">
-        <h3>7/10</h3>
-        <p>точность прогнозов</p>
-      </div>
-      <div class="stat-card">
-        <h3>3</h3>
-        <p>компании</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="skills">
-  <div class="container">
-    <h2>Навыки</h2>
-
-    <h3>Hard skills (профессиональные навыки)</h3>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h4>Стратегический маркетинг и аналитика</h4>
-        <ul>
-          <li>Стратегический анализ: PESTEL, SWOT, 5 сил Портера, конкурентный ландшафт</li>
-          <li>Маркетинговая диагностика и аудит (матрица Гаусса, «точка А» бизнеса)</li>
-          <li>Анализ целевой аудитории (глубинные интервью, сегментация, CJM)</li>
-          <li>Прогнозирование рыночных трендов (точность 7/10)</li>
-          <li>Разработка бренд-стратегии и позиционирования</li>
-          <li>Управление продуктовым портфелем, аудит и развитие продуктов</li>
-          <li>Ценовая и ассортиментная политика</li>
-          <li>Бюджетирование и анализ эффективности рекламных кампаний (ROMI, CPA, CAC)</li>
-          <li>Изучение спроса и предложения на продукцию</li>
-          <li>Прогнозирование объемов продаж</li>
-          <li>Бизнес-анализ и моделирование бизнес-процессов</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Автоматизация и программирование</h4>
-        <ul>
-          <li>Создание интерактивных HTML-форм и утилит (HR-бриф, календари)</li>
-          <li>Разработка Telegram-ботов (шаблонизация контента, обратная связь)</li>
-          <li>Макросы и скрипты: Excel (VBA), JavaScript</li>
-          <li>Интеграция с 1С (постановка ТЗ, тестирование)</li>
-          <li>Настройка дашбордов и систем аналитики (Excel, Google Data Studio, Yandex DataLens)</li>
-          <li>Моделирование бизнес-процессов и автоматизация рутины</li>
-          <li>Постановка задач разработчикам</li>
-          <li>Работа с системами HelpDesk и внутренними задачами</li>
-          <li>Автоматизация рабочих процессов (письма, HTML-код, проверка данных в базах)</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Искусственный интеллект (LLM и генеративные модели)</h4>
-        <ul>
-          <li>ChatGPT (промпт-инжиниринг, генерация контента, анализ текстов)</li>
-          <li>Claude (обработка больших документов, реферирование)</li>
-          <li>DeepSeek (поиск и анализ данных, технические запросы)</li>
-          <li>Grok (работа с неструктурированной информацией, идеи)</li>
-          <li>QWEN (мультиязычные задачи, перевод)</li>
-          <li>Нейро Алиса (голосовые интерфейсы, быстрые справки)</li>
-          <li>Локальные модели: Llama, OSS-модели (развертывание, тестирование)</li>
-          <li>Nanabanana (экспериментальные генеративные инструменты)</li>
-          <li>Midjourney, Kandinsky (генерация визуала)</li>
-          <li>Obsidian + ИИ-плагины (ведение базы знаний, связывание идей)</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Digital-маркетинг и коммуникации</h4>
-        <ul>
-          <li>Управление сайтами на Tilda (структура, редизайн, оптимизация, защита от ботов)</li>
-          <li>SMM: Telegram, VK (контент-планирование, копирайтинг, аналитика)</li>
-          <li>Email-маркетинг (рассылки, сегментация, триггерные цепочки)</li>
-          <li>SEO-оптимизация (семантика, мета-теги, поведенческие факторы)</li>
-          <li>Ведение рекламных кампаний (контекст, таргет)</li>
-          <li>Работа с HelpDesk и CRM-системами</li>
-          <li>Поиск информации в интернете</li>
-          <li>Написание текстов и деловая переписка</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Дизайн и визуальные коммуникации</h4>
-        <ul>
-          <li>Adobe Photoshop, Illustrator (обработка фото, создание макетов)</li>
-          <li>Canva (шаблоны для соцсетей и презентаций)</li>
-          <li>Разработка презентаций (PowerPoint, Google Slides, инфографика)</li>
-          <li>Создание печатной продукции (листовки, каталоги, визитки)</li>
-          <li>Фото- и видеомонтаж</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Выставочная деятельность и PR</h4>
-        <ul>
-          <li>Организация участия в выставках (ПИР, отраслевые конференции)</li>
-          <li>Переговоры с иностранными поставщиками (английский язык)</li>
-          <li>Сбор конкурентной информации на мероприятиях</li>
-          <li>Подготовка пост-релизов и отчётности</li>
-          <li>Организация семинаров и конференций</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Внутренние коммуникации и HR-маркетинг</h4>
-        <ul>
-          <li>Разработка HR-бренда и внутренних коммуникационных кампаний</li>
-          <li>Создание систем обратной связи (анонимные каналы, опросы)</li>
-          <li>Проведение воркшопов и обучений (цифровая грамотность, Telegram)</li>
-          <li>Организация корпоративных мероприятий (буккроссинг, книжный клуб, эко-инициативы)</li>
-          <li>Управление персоналом</li>
-          <li>Обучение и развитие</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Дополнительные hard skills</h4>
-        <ul>
-          <li>Знание языков: Английский (C1 — продвинутый), Немецкий (A1 — начальный)</li>
-          <li>Пользователь ПК (продвинутый уровень)</li>
-          <li>Водительское удостоверение категории B (с собственным автомобилем)</li>
-          <li>Сертификат LCCI (London Chamber of Commerce and Industry, B1 — 2021)</li>
-        </ul>
-      </div>
-    </div>
-
-    <h3>Soft skills (личностные качества и навыки межличностного общения)</h3>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h4>Аналитическое мышление и системность</h4>
-        <ul>
-          <li>Системное мышление: вижу бизнес-процессы целиком, а не отдельные задачи</li>
-          <li>Структурирование информации и данных</li>
-          <li>Умение выявлять причинно-следственные связи</li>
-          <li>Внимание к деталям и качеству</li>
-          <li>Работа с большим объемом информации</li>
-          <li>Грамотность</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Коммуникация и взаимодействие</h4>
-        <ul>
-          <li>Кросс-функциональная коммуникация (HR, IT, производство, топ-менеджмент)</li>
-          <li>Умение чётко ставить задачи разработчикам и смежникам</li>
-          <li>Деловое общение на русском и английском (C1 — продвинутый)</li>
-          <li>Навыки презентации и публичных выступлений</li>
-          <li>Ведение переговоров (в том числе с иностранными партнёрами)</li>
-          <li>Грамотная речь</li>
-          <li>Деловая коммуникация</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Управление проектами и самоорганизация</h4>
-        <ul>
-          <li>Управление проектами от идеи до реализации</li>
-          <li>Работа с большим объёмом информации и многозадачность</li>
-          <li>Тайм-менеджмент и расстановка приоритетов</li>
-          <li>Бюджетирование и контроль ресурсов</li>
-          <li>Организаторские навыки</li>
-          <li>Организация мероприятий</li>
-          <li>Ориентация на результат</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Креативность и гибкость</h4>
-        <ul>
-          <li>Креативный подход к решению задач (новые форматы, нестандартные инструменты)</li>
-          <li>Гибкость и адаптивность к изменениям (освоила 3 внутренние программы за месяц)</li>
-          <li>Инициативность (самостоятельно запускала проекты, предлагала улучшения)</li>
-          <li>Экспериментаторство (тестирование ИИ-инструментов, внедрение инноваций)</li>
-          <li>Креативность</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Лидерство и работа в команде</h4>
-        <ul>
-          <li>Умение работать в команде и выстраивать отношения</li>
-          <li>Обучаемость и желание делиться знаниями (воркшопы для коллег)</li>
-          <li>Наставничество (неформальное обучение младших специалистов)</li>
-          <li>Ответственность за результат</li>
-          <li>Работа в команде</li>
-          <li>Исполнительность</li>
-        </ul>
-      </div>
-
-      <div class="skill-group">
-        <h4>Эмоциональный интеллект и эмпатия</h4>
-        <ul>
-          <li>Понимание потребностей коллег и клиентов</li>
-          <li>Умение создавать доверительную среду (анонимные каналы, книжный клуб)</li>
-          <li>Стрессоустойчивость и способность работать в условиях ограниченных ресурсов</li>
-          <li>Быстрая адаптивность</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="portfolio">
-  <div class="container">
-    <h2>Избранные проекты</h2>
-    <p>Все проекты реализованы в 2023–2026 годах в B2B-сегменте (промышленное оборудование, производство, дистрибуция). Названия компаний обобщены, результаты представлены в относительных величинах.</p>
-
-    <div class="cases-grid">
-      <!-- 1 -->
-      <div class="case-card">
-        <h3>1. Интерактивная модель аналитики на основе матрицы Гаусса</h3>
-        <p class="case-tags">#аналитика #автоматизация #Excel</p>
-        <p class="case-preview">Производственная компания столкнулась с хаосом в отчётности: данные по рынку, продажам и эффективности были разрозненны.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> Производственная компания столкнулась с хаосом в отчётности: данные по рынку, продажам и эффективности были разрозненны, руководство тратило часы на их сбор перед каждым совещанием.</p>
-          <p><strong>Задача:</strong> Создать инструмент, который автоматизирует сбор и визуализацию ключевых показателей и позволит руководителям самостоятельно отслеживать динамику без помощи маркетолога.</p>
-          <p><strong>Мои действия:</strong> Разработала в Excel интерактивную модель на основе матрицы Гаусса с дашбордами в реальном времени. Настроила автоматическое обновление данных, добавила фильтры по периодам и сегментам. Обучила сотрудников пользоваться моделью.</p>
-          <p><strong>Результат:</strong> Время подготовки управленческих отчётов сократилось на 40%. Руководство получило возможность самостоятельно контролировать прогресс и принимать решения без длительных совещаний.</p>
-        </div>
-      </div>
-
-      <!-- 2 -->
-      <div class="case-card">
-        <h3>2. Комплексный стратегический анализ рынка</h3>
-        <p class="case-tags">#анализ #стратегия #рынок</p>
-        <p class="case-preview">B2B-компания готовилась к разработке долгосрочной стратегии, но не имела объективной картины рынка.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> B2B-компания готовилась к разработке долгосрочной стратегии, но не имела объективной картины рынка: слабо представляла конкурентов, тренды и реальные потребности клиентов.</p>
-          <p><strong>Задача:</strong> Провести всестороннее исследование рынка и подготовить базу для стратегических решений.</p>
-          <p><strong>Мои действия:</strong> Организовала и провела глубинные интервью с ключевыми клиентами, сотрудниками и топ-менеджментом. Выполнила кабинетное исследование: PESTEL, SWOT, 5 сил Портера, построила конкурентный ландшафт и товарную матрицу. Проанализировала отраслевые тренды и сделала прогноз на год.</p>
-          <p><strong>Результат:</strong> Сформулированы рекомендации по позиционированию и развитию продуктового портфеля. Точность прогноза трендов составила 7 из 10 (подтверждено фактическими данными года).</p>
-        </div>
-      </div>
-
-      <!-- 3 -->
-      <div class="case-card">
-        <h3>3. Инициация и запуск нового продукта</h3>
-        <p class="case-tags">#продукт #запуск #B2B</p>
-        <p class="case-preview">В ходе аудита продуктового портфеля производственной компании выявилась рыночная ниша.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> В ходе аудита продуктового портфеля производственной компании выявилась рыночная ниша, которую можно было закрыть новым продуктом.</p>
-          <p><strong>Задача:</strong> Разработать концепцию и техническое задание для нового продукта, оценить его коммерческий потенциал.</p>
-          <p><strong>Мои действия:</strong> Провела анализ потребностей целевой аудитории, изучила аналоги, сформулировала требования к продукту. Подготовила ТЗ для разработки, согласовала с производственным отделом и руководством. Участвовала в тестировании прототипа.</p>
-          <p><strong>Результат:</strong> Продукт запущен в производство и выведен на рынок. В тестовый период спрос превысил прогнозы на 15%, продукт включён в основной каталог.</p>
-        </div>
-      </div>
-
-      <!-- 4 -->
-      <div class="case-card">
-        <h3>4. Интерактивный HR-бриф для отдела подбора</h3>
-        <p class="case-tags">#HR #автоматизация #HTML</p>
-        <p class="case-preview">HR-отдел получал заявки на подбор персонала в свободной форме — часто с неполными или противоречивыми данными.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> HR-отдел получал заявки на подбор персонала в свободной форме — часто с неполными или противоречивыми данными. Уходило много времени на уточнения.</p>
-          <p><strong>Задача:</strong> Автоматизировать сбор заявок, исключить ошибки и неполные данные.</p>
-          <p><strong>Мои действия:</strong> Спроектировала HTML-форму с обязательными полями, валидацией и подсказками. После успешного тестирования бриф был интегрирован в корпоративную систему 1С.</p>
-          <p><strong>Результат:</strong> Доля корректно заполненных заявок выросла до 95%, время обработки одной заявки сократилось на 50%.</p>
-        </div>
-      </div>
-
-      <!-- 5 -->
-      <div class="case-card">
-        <h3>5. Автоматическая генерация календаря дней рождений</h3>
-        <p class="case-tags">#HR #автоматизация #JavaScript</p>
-        <p class="case-preview">HR-специалисты вручную отслеживали дни рождения сотрудников и тратили до двух часов в месяц на подготовку списков.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> HR-специалисты вручную отслеживали дни рождения сотрудников и тратили до двух часов в месяц на подготовку списков и поздравлений.</p>
-          <p><strong>Задача:</strong> Исключить ручной труд и исключить ошибки.</p>
-          <p><strong>Мои действия:</strong> Разработала на HTML и JavaScript утилиту, которая читает Excel-таблицу с данными сотрудников и автоматически генерирует календарь на год с подсветкой дат и возможностью экспорта.</p>
-          <p><strong>Результат:</strong> Задача, занимавшая 2 часа в месяц, теперь выполняется за 5 минут. Ошибки в датах полностью исключены.</p>
-        </div>
-      </div>
-
-      <!-- 6 -->
-      <div class="case-card">
-        <h3>6. Telegram-бот для шаблонизации SMM-контента</h3>
-        <p class="case-tags">#SMM #бот #Telegram</p>
-        <p class="case-preview">SMM-менеджеры тратили много времени на создание однотипных постов.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> SMM-менеджеры тратили много времени на создание однотипных постов: наложение водяных знаков, подготовка изображений по шаблонам, написание текстов.</p>
-          <p><strong>Задача:</strong> Ускорить производство контента и стандартизировать визуальный стиль.</p>
-          <p><strong>Мои действия:</strong> Создала Telegram-бота, который по команде генерирует изображение из загруженного шаблона, накладывает логотип, готовит текст поста и выдаёт готовый файл. Бот также умеет делать пакетную обработку.</p>
-          <p><strong>Результат:</strong> Время подготовки одного поста сократилось в 3 раза. Все публикации теперь выдержаны в едином стиле.</p>
-        </div>
-      </div>
-
-      <!-- 7 -->
-      <div class="case-card">
-        <h3>7. Внедрение ИИ-инструментов в маркетинговые процессы</h3>
-        <p class="case-tags">#ИИ #автоматизация #аналитика</p>
-        <p class="case-preview">Аналитические задачи отнимали много ручного труда.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> Аналитические задачи (обработка прайс-листов, перевод документации, подготовка отчётов) отнимали много ручного труда.</p>
-          <p><strong>Задача:</strong> Ускорить обработку информации и повысить качество аналитики.</p>
-          <p><strong>Мои действия:</strong> Настроила промпты для ChatGPT, Claude и DeepSeek под типовые задачи: сравнение характеристик, поиск аналогов, генерация резюме, перевод технических текстов. Обучила коллег использовать LLM для рутинных операций.</p>
-          <p><strong>Результат:</strong> Скорость подготовки аналитических отчётов выросла на 30%, объём обрабатываемой информации увеличился на 20%. Снижено количество ошибок при ручном вводе.</p>
-        </div>
-      </div>
-
-      <!-- 8 -->
-      <div class="case-card">
-        <h3>8. Анонимный канал обратной связи с сотрудниками</h3>
-        <p class="case-tags">#коммуникации #HR</p>
-        <p class="case-preview">В компании отсутствовал открытый диалог между линейным персоналом и руководством.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> В компании отсутствовал открытый диалог между линейным персоналом и руководством, что снижало вовлечённость и порождало слухи.</p>
-          <p><strong>Задача:</strong> Создать безопасное пространство для сбора обратной связи.</p>
-          <p><strong>Мои действия:</strong> Разработала анонимный чат (HTML), куда сотрудники могли отправлять вопросы, жалобы и предложения. Регулярно агрегировала данные и передавала руководству в обобщённом виде.</p>
-          <p><strong>Результат:</strong> Улучшение внутреннего климата подтверждено анонимными опросами: удовлетворённость выросла на 25%. Руководство стало оперативно реагировать на проблемы.</p>
-        </div>
-      </div>
-
-      <!-- 9 -->
-      <div class="case-card">
-        <h3>9. Корпоративная эко-инициатива «Добрые крышечки»</h3>
-        <p class="case-tags">#ESG #экология #коммуникации</p>
-        <p class="case-preview">Компания хотела укрепить ESG-имидж, но не имела реальных экологических проектов.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> Компания хотела укрепить ESG-имидж, но не имела реальных экологических проектов.</p>
-          <p><strong>Задача:</strong> Запустить инициативу, которая вовлечёт сотрудников и будет заметна вовне.</p>
-          <p><strong>Мои действия:</strong> Организовала сбор пластиковых крышечек в офисах и на производстве. Наладила партнёрство с Recycle Object для выпуска мерча из переработанной плёнки. Разработала смысловую платформу проекта и коммуникацию внутри компании.</p>
-          <p><strong>Результат:</strong> В проекте участвует более 50% сотрудников. Компания получила позитивные упоминания в отраслевых СМИ и укрепила HR-бренд.</p>
-        </div>
-      </div>
-
-      <!-- 10 -->
-      <div class="case-card">
-        <h3>10. Разработка бренд-стратегии и временного брендбука</h3>
-        <p class="case-tags">#брендинг #стратегия #дизайн</p>
-        <p class="case-preview">У производственной компании не было единого позиционирования.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> У производственной компании не было единого позиционирования, ценности не были сформулированы, визуальный стиль отсутствовал.</p>
-          <p><strong>Задача:</strong> Создать основу для системного брендинга.</p>
-          <p><strong>Мои действия:</strong> На основе проведённой диагностики (интервью, анализ конкурентов, тренды) сформулировала миссию, ценности и tone of voice бренда. Разработала временный брендбук: логотип, цветовая палитра, типографика, шаблоны основных носителей.</p>
-          <p><strong>Результат:</strong> Все новые коммуникации (сайт, презентации, соцсети) выдержаны в едином стиле. Узнаваемость бренда среди целевой аудитории выросла (опросы показали прирост на 15%).</p>
-        </div>
-      </div>
-
-      <!-- 11 -->
-      <div class="case-card">
-        <h3>11. Редизайн и оптимизация сайта на Tilda: рост трафика и снижение отказов</h3>
-        <p class="case-tags">#сайт #оптимизация #Tilda</p>
-        <p class="case-preview">Сайт производителя холодильного оборудования имел устаревшую структуру и страдал от ботов.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> Сайт производителя холодильного оборудования имел устаревшую структуру и страдал от ботов: показатель отказов достигал 80%.</p>
-          <p><strong>Задача:</strong> Увеличить органический трафик и улучшить поведенческие факторы.</p>
-          <p><strong>Мои действия:</strong> Провела аудит сайта: выявила технические ошибки, изменила структуру, обновила дизайн. Внедрила защиту от ботов, оптимизировала контент и семантику. Настроила аналитику для отслеживания изменений.</p>
-          <p><strong>Результат:</strong> Показатель отказов снизился с 80% до 13%. Посещаемость сайта выросла на 33% за полгода. Увеличилось число заявок с сайта на 20%.</p>
-        </div>
-      </div>
-
-      <!-- 12 -->
-      <div class="case-card">
-        <h3>12. Развитие Telegram-канала: с 17 до 84 подписчиков при вовлечённости 124%</h3>
-        <p class="case-tags">#SMM #Telegram #контент</p>
-        <p class="case-preview">Корпоративный Telegram-канал производителя оборудования практически не работал.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> Корпоративный Telegram-канал производителя оборудования практически не работал: 17 подписчиков, редкие публикации, нулевая вовлечённость.</p>
-          <p><strong>Задача:</strong> Превратить канал в полезный ресурс для дилеров и партнёров, повысить активность.</p>
-          <p><strong>Мои действия:</strong> Разработала контент-план с упором на экспертный контент: обзоры оборудования, кейсы установки, ответы на частые вопросы. Использовала бота для визуала (см. кейс 6). Запустила интерактивы (опросы, викторины).</p>
-          <p><strong>Результат:</strong> Аудитория выросла в 5 раз (с 17 до 84 подписчиков). Средний уровень вовлечённости (ER) составил 124% — каждый подписчик в среднем оставлял больше одной реакции в месяц.</p>
-        </div>
-      </div>
-
-      <!-- 13 -->
-      <div class="case-card">
-        <h3>13. Выставка ПИР 2023: поиск нового поставщика</h3>
-        <p class="case-tags">#выставки #переговоры #B2B</p>
-        <p class="case-preview">Компания-дистрибьютор оборудования для HoReCa искала возможности расширения ассортимента.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> Компания-дистрибьютор оборудования для HoReCa искала возможности расширения ассортимента в категории соковыжималок.</p>
-          <p><strong>Задача:</strong> Найти надёжного производителя и договориться о поставках.</p>
-          <p><strong>Мои действия:</strong> На выставке ПИР 2023 активно взаимодействовала с китайскими поставщиками на английском языке: провела переговоры, собрала коммерческие предложения и образцы продукции. Проанализировала конкурентные цены и условия.</p>
-          <p><strong>Результат:</strong> Заключено эксклюзивное соглашение с новым поставщиком соковыжималок. Ассортимент компании пополнился новой линейкой, что обеспечило +12% к выручке категории в первый год.</p>
-        </div>
-      </div>
-
-      <!-- 14 -->
-      <div class="case-card">
-        <h3>14. Автоматизация рутинных задач с помощью скриптов и макросов</h3>
-        <p class="case-tags">#автоматизация #скрипты #Excel</p>
-        <p class="case-preview">При работе с базой данных и документацией было много повторяющихся операций.</p>
-        <button class="case-toggle">Подробнее</button>
-        <div class="case-details hidden">
-          <p><strong>Контекст:</strong> При работе с базой данных и документацией было много повторяющихся операций: проверка корректности ввода, формирование однотипных писем, форматирование отчётов.</p>
-          <p><strong>Задача:</strong> Освободить время сотрудников для более ценной аналитики.</p>
-          <p><strong>Мои действия:</strong> Написала макросы в Excel для автоматической проверки данных и генерации отчётов. Создала небольшие скрипты (JavaScript, VBA) для пакетной обработки файлов и автоматической рассылки писем по шаблонам.</p>
-          <p><strong>Результат:</strong> Экономия времени составила до 15 часов в месяц на отдел. Количество ошибок при ручном вводе снизилось на 80%.</p>
-        </div>
-      </div>
-    </div>
-
-    <h3>Ключевые результаты в цифрах</h3>
-    <ul>
-      <li>40% — сокращение времени подготовки отчётов (матрица Гаусса)</li>
-      <li>95% — доля корректных HR-заявок после внедрения брифа</li>
-      <li>50% — сокращение времени обработки заявок</li>
-      <li>80% → 13% — снижение показателя отказов сайта</li>
-      <li>33% — рост трафика сайта</li>
-      <li>124% — вовлечённость в Telegram-канале</li>
-      <li>5× — рост аудитории Telegram</li>
-      <li>+12% — прирост выручки категории после вывода нового продукта</li>
-      <li>30% — ускорение аналитических отчётов с помощью ИИ</li>
-      <li>25% — рост удовлетворённости сотрудников после внедрения обратной связи</li>
-    </ul>
-  </div>
-</section>
-
-<section id="tech">
-  <div class="container">
-    <h2>Инструменты и технологии</h2>
-    <div class="tech-stack">
-      <div class="tech-item"><i class="fas fa-table"></i> Excel (сложные модели)</div>
-      <div class="tech-item"><i class="fas fa-chart-line"></i> Дашборды</div>
-      <div class="tech-item"><i class="fas fa-analytics"></i> Google Analytics</div>
-      <div class="tech-item"><i class="fas fa-analytics"></i> Yandex.Metrica</div>
-      <div class="tech-item"><i class="fab fa-trello"></i> Tilda</div>
-      <div class="tech-item"><i class="fab fa-brush"></i> Презентации</div>
-      <div class="tech-item"><i class="fab fa-telegram"></i> Telegram API</div>
-      <div class="tech-item"><i class="fab fa-html5"></i> HTML</div>
-      <div class="tech-item"><i class="fas fa-robot"></i> Боты</div>
-      <div class="tech-item"><i class="fas fa-brain"></i> ChatGPT</div>
-      <div class="tech-item"><i class="fas fa-brain"></i> Claude</div>
-      <div class="tech-item"><i class="fas fa-brain"></i> DeepSeek</div>
-      <div class="tech-item"><i class="fas fa-brain"></i> Midjourney</div>
-      <div class="tech-item"><i class="fas fa-brain"></i> GROK</div>
-      <div class="tech-item"><i class="fas fa-brain"></i> Яндекс AI</div>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="container">
-    <h2>Свяжитесь со мной</h2>
-    <ul>
-      <li>Email: <a href="mailto:nastya.chechina@yandex.ru">nastya.chechina@yandex.ru</a></li>
-      <li>Telegram: <a href="https://t.me/annastasi_ch" target="_blank" rel="noopener noreferrer">@annastasi_ch</a></li>
-      <li>Телефон: <a href="tel:+79017946468">+7 (901) 794-64-68</a></li>
-    </ul>
-
-    <div class="contact-actions">
-      <a
-        href="https://hh.ru/resume/ca083b49ff1017b8800039ed1f71596a777377?from=share_ios"
-        class="btn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть HH
-      </a>
-
-      <a
-        href="https://t.me/annastasi_ch"
-        class="btn"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <i class="fab fa-telegram"></i> Написать в Telegram
-      </a>
-
-      <a href="Кузнецова%20А%20_%20резюме.pdf" class="btn secondary" download>
-        <i class="fa-regular fa-file-lines"></i> Скачать резюме (PDF)
-      </a>
-    </div>
-
-    <p style="color: var(--muted); margin-top: 14px;">Готова к обсуждению проектов, отвечу в течение дня</p>
-  </div>
-</section>
-
-<footer>
-  <div class="container">
-    <p>&copy; 2026, Анастасия Кузнецова.
-      <a href="Кузнецова%20А%20_%20резюме.pdf" download>Скачать резюме (PDF)</a>
-    </p>
-  </div>
-</footer>
+</div>
 
 <script>
-  // кейсы
-  document.querySelectorAll('.case-toggle').forEach(button => {
-    button.addEventListener('click', () => {
-      const details = button.nextElementSibling;
-      details.classList.toggle('hidden');
-      button.textContent = details.classList.contains('hidden') ? 'Подробнее' : 'Скрыть';
-    });
+function toggleMore() {
+  const block = document.getElementById("moreContent");
+  block.style.display = block.style.display === "block" ? "none" : "block";
+}
+
+function filterSkills(type, button) {
+  const items = document.querySelectorAll(".skill-item");
+  const buttons = document.querySelectorAll(".filter-btn");
+
+  buttons.forEach(btn => btn.classList.remove("active"));
+  button.classList.add("active");
+
+  items.forEach(item => {
+    if (type === "all" || item.dataset.type === type) {
+      item.style.display = "list-item";
+    } else {
+      item.style.display = "none";
+    }
   });
+}
 
-  // мобильное меню
-  const menuBtn = document.getElementById('menuBtn');
-  const mobileMenu = document.getElementById('mobileMenu');
-  const closeMenu = document.getElementById('closeMenu');
+function searchSkills(query) {
+  const items = document.querySelectorAll(".skill-item");
+  query = query.toLowerCase();
 
-  function openMenu(){
-    mobileMenu.classList.add('open');
-    mobileMenu.setAttribute('aria-hidden', 'false');
-    menuBtn.setAttribute('aria-expanded', 'true');
-  }
-
-  function closeMenuFn(){
-    mobileMenu.classList.remove('open');
-    mobileMenu.setAttribute('aria-hidden', 'true');
-    menuBtn.setAttribute('aria-expanded', 'false');
-  }
-
-  if(menuBtn && mobileMenu){
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.contains('open') ? closeMenuFn() : openMenu();
-    });
-  }
-  if(closeMenu){
-    closeMenu.addEventListener('click', closeMenuFn);
-  }
-
-  // при клике по пункту меню закрываем (приятнее на телефоне)
-  document.querySelectorAll('.m-link').forEach(a => {
-    a.addEventListener('click', () => {
-      closeMenuFn();
-    });
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    item.style.display = text.includes(query) ? "list-item" : "none";
   });
-
-  // если развернули экран/перешли в десктоп, закрываем меню на всякий
-  window.addEventListener('resize', () => {
-    if(window.innerWidth > 560) closeMenuFn();
-  });
+}
 </script>
+
 </body>
 </html>
